@@ -13,7 +13,7 @@ const Home = () => {
         {/* Overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/60 z-0"></div>
 
-        {/* Content */}
+        {/* Content  hfhfnh*/}
         <div className="relative z-10 mt-16"> 
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
             Hi, I'm sonam – A Passionate React Developer
