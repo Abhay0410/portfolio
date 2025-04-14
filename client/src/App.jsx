@@ -1,12 +1,11 @@
-
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './componets/Navbar.jsx';
-import Footer from './componets/Footer';
+import Navbar from './componets/Navbar'; // Corrected path
+import Footer from './componets/Footer'; // Corrected path
 
 import Home from './pages/Home';
 import About from './pages/About';
 import Services from './pages/Services';
-import Portfolio from './pages/Portfolio';
+// import Portfolio from './pages/';
 import Testimonials from './pages/Testimonials';
 import Contact from './pages/Contact';
 
@@ -21,7 +20,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/services" element={<Services />} />
-            <Route path="/portfolio" element={<Portfolio />} />
+            {/* <Route path="/portfolio" element={<Portfolio />} /> */}
             <Route path="/testimonials" element={<Testimonials />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>
