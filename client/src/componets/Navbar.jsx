@@ -20,7 +20,7 @@ const Navbar = () => {
           <NavLink to="/" label="Home" />
           <NavLink to="/about" label="About" />
           <NavLink to="/services" label="Services" />
-          {/* <NavLink to="/portfolio" label="Portfolio" /> */}
+          <NavLink to="/projects" label="Projects" />
           {/* <NavLink to="/testimonials" label="Testimonials" /> */}
           <NavLink to="/contact" label="Contact" />
         </div>
@@ -48,8 +48,8 @@ const Navbar = () => {
           <NavLink to="/" label="Home" onClick={toggleMenu} />
           <NavLink to="/about" label="About" onClick={toggleMenu} />
           <NavLink to="/services" label="Services" onClick={toggleMenu} />
-          {/* <NavLink to="/portfolio" label="Portfolio" onClick={toggleMenu} />
-          <NavLink to="/testimonials" label="Testimonials" onClick={toggleMenu} /> */}
+          <NavLink to="/Projects" label="Projects" onClick={toggleMenu} />
+          <NavLink to="/testimonials" label="Testimonials" onClick={toggleMenu} />
           <NavLink to="/contact" label="Contact" onClick={toggleMenu} />
         </div>
       )}
