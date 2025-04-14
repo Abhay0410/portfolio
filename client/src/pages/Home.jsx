@@ -16,7 +16,7 @@ const Home = () => {
         {/* Content */}
         <div className="relative z-10 mt-16"> 
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-            Hi, I'm Abhay – A Passionate React Developer
+            Hi, I'm sonam – A Passionate React Developer
           </h1>
           <p className="text-white text-2xl md:text-3xl font-medium max-w-xl mx-auto mb-4">
             Crafting modern web experiences with clean code and creative UI
