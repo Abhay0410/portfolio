@@ -8,18 +8,19 @@ const Footer = () => {
         <div>
           <h3 className="text-lg font-semibold mb-4">About Us</h3>
           <p className="text-gray-300 text-sm">
-          At Zager Digital Services, we believe that exceptional Digital Marketing and IT solutions stem from a core commitment to integrity, innovation, and excellence. Founded with the mission to empower businesses through cutting-edge technology and strategic marketing, we take pride in delivering tailored solutions that drive growth and success.
+          A portfolio is a curated collection of work that showcases a person's skills, experience, and accomplishments. It serves as a visual representation of an individual's professional journey, offering potential clients or employers insight into their abilities. For a web developer, a portfolio typically includes projects, designs, and code snippets that highlight technical expertise and creativity. A well-organized portfolio not only demonstrates proficiency but also reflects a person’s personal style. It's a valuable tool for building credibility, attracting clients, and securing job opportunities, as it visually communicates one's capabilities and previous work experiences.
+
           </p>
         </div>
 
         <div>
           <h3 className="text-lg font-semibold mb-4 ">Quick Links</h3>
           <ul className="text-gray-300 text-sm space-y-2 ">
-            <li><a href="#">About</a></li>
-            <li><a href="#">Contact Us</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact Us</a></li>
             <li><a href="#">Privacy Policy</a></li>
             <li><a href="#">Terms of Service</a></li>
-            <li><a href="#" className="font-bold">Admin</a></li>
+            <li><a href="/" className="font-bold">Admin</a></li>
           </ul>
         </div>
 
@@ -29,14 +30,14 @@ const Footer = () => {
           <ul className="text-gray-300 text-sm space-y-3">
             <li className="flex items-start gap-2">
               <MapPin className="w-4 h-4 mt-1" />
-              Startup Enclave, CSIT Campus, Shivaji Nagar, Durg, Chhattisgarh
+              CSIT Campus, Shivaji Nagar, Durg, Chhattisgarh
             </li>
             <li className="flex items-center gap-2">
-              <Phone className="w-4 h-4" /> +91-9407655717
+              <Phone className="w-4 h-4" /> +91 7067328563/+91 73895 90580
             </li>
             <li className="flex items-center gap-2">
              
-              <Mail className="w-4 h-4" /> contact@zager.in
+              <Mail className="w-4 h-4" /> kumarsinghabhay77@gmail.com
             </li>
           </ul>
         </div>
@@ -45,17 +46,17 @@ const Footer = () => {
       <div className="border-t border-gray-700 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
         
         <div className="flex space-x-4 mb-4 md:mb-0">
-        <a href="https://www.facebook.com/zagerdigitalservices" target="_blank" rel="noopener noreferrer">
+        <a href="#" target="_blank" rel="noopener noreferrer">
           <Facebook size={30} className=" ml-23 hover:text-blue-500" />
           </a>
-        <a href="https://www.instagram.com/zagerdigitalservices/" target="_blank" rel="noopener noreferrer">
+        <a href="https://www.instagram.com/_l.abhay.l_/" target="_blank" rel="noopener noreferrer">
           <Instagram size={30} className="  hover:text-blue-500" />
           </a>
-        <a href="https://www.linkedin.com/company/zagerdigitalservices/posts/?feedView=all" target="_blank" rel="noopener noreferrer">
+        <a href="https://www.linkedin.com/in/sonam-soni-/" target="_blank" rel="noopener noreferrer">
           <Linkedin size={30} className=" hover:text-blue-500" />
           </a> 
         </div>
-        <p>© 2025 Zager Digital Services. All rights reserved.</p>
+        <p>© 2025 Abhay_Sonam. All rights reserved.</p>
       </div>
     </footer>
   );

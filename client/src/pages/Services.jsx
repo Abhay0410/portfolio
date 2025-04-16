@@ -1,6 +1,6 @@
 import React from 'react';
-import { Code, Paintbrush, Smartphone, } from 'lucide-react'; 
-
+import { Code, Paintbrush, Smartphone, Search, Layout, Film } from 'lucide-react'; 
+import SerBg from '../assets/service.jpg';
 const services = [
   {
     title: 'Web Development',
@@ -17,30 +17,52 @@ const services = [
     icon: <Smartphone className="w-10 h-10 text-blue-600" />,
     description: 'Ensuring your website looks and works great on all mobile devices.',
   },
+  {
+    title: 'SEO Optimization',
+    icon: <Search className="w-10 h-10 text-blue-600" />,
+    description: 'Improving your website’s visibility on search engines to drive organic traffic.',
+  },
+  {
+    title: 'App Design',
+    icon: <Layout className="w-10 h-10 text-blue-600" />,
+    description: 'Creating intuitive and visually appealing designs for mobile and web applications.',
+  },
+  {
+    title: 'Animated Video Production',
+    icon: <Film className="w-10 h-10 text-blue-600" />,
+    description: 'Producing engaging animated videos to effectively communicate your brand’s story.',
+  },
 ];
 
 const Services = () => {
   return (
-    <section className="py-20 bg-gray-100" id="services">
-      <div className="max-w-6xl mx-auto px-4">
-        <h1 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">
-          Our Services
-        </h1>
-        <p className='text-2xl md:text-2xl font-bold text-center text-yellow-800 mb-12'>Custom Digital Solutions for
-        Your Successful Business</p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-          {services.map((service, index) => (
-            <div key={index} className="bg-white p-6 rounded-lg shadow-md text-center hover:shadow-xl transition duration-300">
-              <div className="mb-4 flex justify-center">
-                {service.icon}
-              </div>
-              <h3 className="text-xl font-semibold text-gray-700 mb-2">{service.title}</h3>
-              <p className="text-gray-600">{service.description}</p>
-            </div>
-          ))}
+    <section
+  className="py-20 bg-cover bg-center bg-no-repeat relative"
+  style={{ backgroundImage: `url(${SerBg})` }}
+  id="services"
+>
+  <div className="absolute inset-0 bg-white/5 backdrop-blur-md"></div> {/* Semi-transparent overlay */}
+  <div className="relative max-w-6xl mx-auto px-4">
+    <h1 className="text-4xl md:text-5xl font-extrabold text-center text-blue-800 drop-shadow-md mb-4">
+      Our Services
+    </h1>
+    <p className="text-xl md:text-2xl text-center font-semibold text-purple-900 mb-12 drop-shadow">
+      Custom Digital Solutions for Your Successful Business
+    </p>
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+      {services.map((service, index) => (
+        <div
+          key={index}
+          className="bg-white/70 backdrop-blur-md p-6 rounded-2xl shadow-lg text-center hover:shadow-2xl transition duration-300 border border-blue-100"
+        >
+          <div className="mb-4 flex justify-center">{service.icon}</div>
+          <h3 className="text-lg md:text-xl font-semibold text-blue-800 mb-2">{service.title}</h3>
+          <p className="text-gray-700">{service.description}</p>
         </div>
-      </div>
-    </section>
+      ))}
+    </div>
+  </div>
+</section>
   );
 };
 
