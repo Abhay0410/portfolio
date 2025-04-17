@@ -1,6 +1,6 @@
 import React from "react";
-import {Facebook,Instagram,Linkedin,Mail,Phone,MapPin,} from "lucide-react";
-
+import {Facebook,Instagram,Linkedin,Mail,Phone,MapPin,} from "lucide-react"; 
+import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <footer className="bg-[#051224] text-white py-12 px-6 border-t">
@@ -16,11 +16,11 @@ const Footer = () => {
         <div>
           <h3 className="text-lg font-semibold mb-4 ">Quick Links</h3>
           <ul className="text-gray-300 text-sm space-y-2 ">
-            <li><a href="/about">About</a></li>
-            <li><a href="/contact">Contact Us</a></li>
-            <li><a href="#">Privacy Policy</a></li>
-            <li><a href="#">Terms of Service</a></li>
-            <li><a href="/" className="font-bold">Admin</a></li>
+          <li><Link to="/about">About</Link></li>
+            <li><Link to="/contact">Contact Us</Link></li>
+            <li><Link to="/privacy-policy">Privacy Policy</Link></li>
+            <li><Link to="/terms-of-service">Terms of Service</Link></li>
+            <li><Link to="/admin" className="font-bold">Admin</Link></li>
           </ul>
         </div>
 

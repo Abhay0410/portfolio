@@ -8,11 +8,15 @@ import Services from './pages/Services';
 import Projects from './pages/Projects';
 
 import Contact from './pages/Contact';
-import WebDevelopment from './pages/web-development.jsx';
+import WebDevelopment from './pages/web-development';
 import UIUX from './pages/UI';
 import SEO from './pages/SEO';
 import AppD from './pages/AppD';
 import AnimeV from './pages/AnimeV';
+
+import AdminLogin from "./pages/AdminLogin"
+import Adashboard from './pages/Adashboard';
+
 function App() {
   return (
     <Router>
@@ -24,14 +28,16 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/services" element={<Services />} />
-            <Route path="/Projects" element={<Projects/>} />
+            <Route path="/projects" element={<Projects />} />
             
             <Route path="/contact" element={<Contact />} />
-            <Route path="/pages/AppD" element={<AppD />} />
-            <Route path="/pages/UI" element={<UIUX/>} />
-            <Route path="/pages/SEO" element={<SEO/>} />
-            <Route path="/pages/Web-development" element={<WebDevelopment/>} />
-            <Route path="/pages/AnimeV" element={<AnimeV/>} />
+            <Route path="/appd" element={<AppD />} />
+            <Route path="/ui" element={<UIUX />} />
+            <Route path="/seo" element={<SEO />} />
+            <Route path="/web-development" element={<WebDevelopment />} />
+            <Route path="/animev" element={<AnimeV />} />
+            <Route path="/admin" element={<AdminLogin />} />
+            <Route path="/adashboard" element={<Adashboard />} />
           </Routes>
         </main>
 
