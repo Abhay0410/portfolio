@@ -33,11 +33,11 @@ const Navbar = () => {
            <Link to="/services" className="text-gray-200 font-medium hover:text-white border-b-2 border-transparent hover:border-white transition-all">Services</Link>
 
             <div className={`absolute left-0 mt-2 w-48 bg-white shadow-lg rounded-lg transition-all duration-200 ${isDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
-              <DropdownLink to="/pages/Web-development" label="Web Development" />
-              <DropdownLink to="/pages/UI" label="UI/UX Design" />
-              <DropdownLink to="/pages/SEO" label="SEO Optimization" />
-              <DropdownLink to="/pages/AppD" label="App Design" />
-              <DropdownLink to="/pages/AnimeV" label="Animated Video" />
+              <DropdownLink to="/Web-development" label="Web Development" />
+              <DropdownLink to="/UI" label="UI/UX Design" />
+              <DropdownLink to="/SEO" label="SEO Optimization" />
+              <DropdownLink to="/AppD" label="App Design" />
+              <DropdownLink to="/AnimeV" label="Animated Video" />
             </div>
           </div>
 

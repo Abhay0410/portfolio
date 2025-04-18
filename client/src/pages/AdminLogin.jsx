@@ -19,7 +19,7 @@ const AdminLogin = () => {
       setToken(res.data.token);
       localStorage.setItem('token', res.data.token); // Store token in local storage
       setMessage('Login successful!');
-      alert('Login successful!');
+      // alert('Login successful!');
       navigate("/adashboard"); // Redirect to dashboard after login
 
     } catch (err) {

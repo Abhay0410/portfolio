@@ -14,7 +14,10 @@ const adminUser = {
   password: "123", // Never store plain text in production!
 };
 
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true
+}));
 app.use(bodyParser.json());
 
 // Login route

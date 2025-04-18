@@ -8,7 +8,7 @@ import Services from './pages/Services';
 import Projects from './pages/Projects';
 
 import Contact from './pages/Contact';
-import WebDevelopment from './pages/web-development';
+import WebDevelopment from './pages/Web-development';
 import UIUX from './pages/UI';
 import SEO from './pages/SEO';
 import AppD from './pages/AppD';
