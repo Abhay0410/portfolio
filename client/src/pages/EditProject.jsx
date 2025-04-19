@@ -4,17 +4,17 @@ import { useNavigate, useParams } from 'react-router-dom';
 const EditProject = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [form, setForm] = useState({ title: '', client: '', date: '' });
+  const [form, setForm] = useState({ title: '', client: '', about: '', image: null });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchProject = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/projects/${id}`);
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/projects/${id}`);
         const data = await res.json();
         if (res.ok) {
-          setForm({ title: data.title, client: data.client, date: data.date.split('T')[0] });
+          setForm({ title: data.title, client: data.client, about: data.about, image: data.image });
         } else {
           setError('Project not found');
         }
@@ -27,27 +27,36 @@ const EditProject = () => {
   }, [id]);
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    if (e.target.name === 'image') {
+      setForm({ ...form, image: e.target.files[0] }); // Handle image file selection
+    } else {
+      setForm({ ...form, [e.target.name]: e.target.value });
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem('token');
 
-    if (!form.title || !form.client || !form.date) {
+    if (!form.title || !form.client || !form.about || !form.image) {
       setError('All fields are required');
       return;
     }
 
     try {
       setLoading(true);
+      const formData = new FormData();
+      formData.append('title', form.title);
+      formData.append('client', form.client);
+      formData.append('about', form.about);
+      formData.append('image', form.image);
+
       const res = await fetch(`${import.meta.env.VITE_API_URL}/api/projects/${id}`, {
         method: 'PUT',
         headers: {
-          'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(form),
+        body: formData,
       });
 
       if (!res.ok) {
@@ -68,8 +77,9 @@ const EditProject = () => {
       {error && <p className="text-red-600">{error}</p>}
       <form onSubmit={handleSubmit} className="space-y-4">
         <input type="text" name="title" placeholder="Project Title" value={form.title} onChange={handleChange} className="w-full p-2 border rounded" required />
+        <textarea name="about" placeholder="Project Description" value={form.about} onChange={handleChange} className="w-full p-2 border rounded" required />
         <input type="text" name="client" placeholder="Client Name" value={form.client} onChange={handleChange} className="w-full p-2 border rounded" required />
-        <input type="date" name="date" value={form.date} onChange={handleChange} className="w-full p-2 border rounded" required />
+        <input type="file" name="image" onChange={handleChange} className="w-full p-2 border rounded" required />
 
         <div className="flex gap-4">
           <button type="submit" className="px-4 py-2 bg-green-600 text-white rounded" disabled={loading}>
