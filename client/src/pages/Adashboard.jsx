@@ -1,243 +1,124 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import AdminSidebar from '../componets/AdminSidebar';
 
 const Adashboard = () => {
-  const [message, setMessage] = useState('');
-  const [projects, setProjects] = useState([]);
-  const [stats, setStats] = useState({
-    projectCount: 0,
-    blogCount: 0,
-    testimonialCount: 0
-  });
-  const [activeSection, setActiveSection] = useState('dashboard');
-  
-  // Function to navigate programmatically
-  const navigateTo = (path) => {
-    window.location.href = path;
-  };
+  const [stats, setStats] = useState({ projects: 0, blogs: 0, testimonials: 0, gallery: 0 });
+  const [recentProjects, setRecentProjects] = useState(JSON.parse(localStorage.getItem('recentProjects')) || []);
+  const [recentTestimonials, setRecentTestimonials] = useState(JSON.parse(localStorage.getItem('recentTestimonials')) || []);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
   useEffect(() => {
-    const fetchDashboard = async () => {
+    const fetchData = async () => {
       try {
+        setLoading(true);
         const token = localStorage.getItem('token');
-        if (!token) {
-          navigateTo('/dmin');
-          return;
-        }
 
-        // Fetch dashboard data
-        const dashboardRes = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/dashboard`, {
-          method: 'GET',
-          headers: {
-            'Authorization': `Bearer ${token}`,
-          },
-        });
-        
-        if (!dashboardRes.ok) {
-          throw new Error('Failed to fetch dashboard data');
-        }
-        
-        const dashboardData = await dashboardRes.json();
-        setMessage(dashboardData.message);
-        
-        // Fetch projects
-        const projectsRes = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/projects`, {
-          method: 'GET',
-          headers: {
-            'Authorization': `Bearer ${token}`,
-          },
-        });
-        
-        if (!projectsRes.ok) {
-          throw new Error('Failed to fetch projects');
-        }
-        
+        // Fetch individual counts
+        const projectsRes = await fetch('http://localhost:5000/api/projects');
+        if (!projectsRes.ok) throw new Error('Failed to fetch projects');
+
         const projectsData = await projectsRes.json();
-        setProjects(projectsData);
-        
-        // Update stats
-        setStats({
-          projectCount: projectsData.length,
-          blogCount: 5,  // Replace with actual API call when implemented
-          testimonialCount: 3  // Replace with actual API call when implemented
-        });
-      } catch (err) {
-        setMessage('Access denied. Please login.');
-        navigateTo('/admin');
+        setStats({ projects: projectsData.length });
+        setRecentProjects(projectsData.slice(0, 3));
+        localStorage.setItem('recentProjects', JSON.stringify(projectsData.slice(0, 3))); // Cache data
+      } catch (error) {
+        setError('Failed to fetch data. Showing cached data.');
+      } finally {
+        setLoading(false);
       }
     };
 
-    fetchDashboard();
+    fetchData();
   }, []);
 
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    navigateTo('/admin');
-  };
-
-  const handleEdit = (projectId) => {
-    navigateTo(`/admin/edit-project/${projectId}`);
-  };
-
-  const handleDelete = async (projectId) => {
-    if (window.confirm('Are you sure you want to delete this project?')) {
-      try {
-        const token = localStorage.getItem('token');
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/projects/${projectId}`, {
-          method: 'DELETE',
-          headers: {
-            'Authorization': `Bearer ${token}`,
-          },
-        });
-        
-        if (!response.ok) {
-          throw new Error('Failed to delete project');
-        }
-        
-        // Refresh projects list
-        setProjects(projects.filter(project => project._id !== projectId));
-        setStats(prev => ({...prev, projectCount: prev.projectCount - 1}));
-      } catch (err) {
-        console.error('Error deleting project:', err);
-      }
-    }
-  };
-
-  const renderDashboardContent = () => {
+  if (loading) {
     return (
-      <div>
-        <h2 className="text-2xl font-bold mb-6">Dashboard</h2>
-        
-        {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-          <div className="bg-white p-4 rounded shadow">
-            <div className="text-3xl font-bold">{stats.projectCount}</div>
-            <div className="text-gray-600">Projects</div>
-          </div>
-          <div className="bg-white p-4 rounded shadow">
-            <div className="text-3xl font-bold">{stats.blogCount}</div>
-            <div className="text-gray-600">Blog Posts</div>
-          </div>
-          <div className="bg-white p-4 rounded shadow">
-            <div className="text-3xl font-bold">{stats.testimonialCount}</div>
-            <div className="text-gray-600">Testimonials</div>
-          </div>
-        </div>
-        
-        {/* Recent Projects */}
-        <div className="bg-white p-4 rounded shadow mb-6">
-          <div className="flex justify-between items-center mb-4">
-            <h3 className="text-xl font-semibold">Recent Projects</h3>
-            <button 
-              onClick={() => setActiveSection('projects')}
-              className="text-blue-600 hover:underline"
-            >
-              View All
-            </button>
-          </div>
-          <div>
-            {projects.slice(0, 3).map(project => (
-              <div key={project._id} className="mb-2 pb-2 border-b">
-                {project.title}
-              </div>
-            ))}
-          </div>
+      <div className="flex">
+        <AdminSidebar />
+        <div className="flex-1 flex justify-center items-center h-screen">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
         </div>
       </div>
     );
-  };
-
-  const renderProjectsContent = () => {
-    return (
-      <div>
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold">Projects</h2>
-          <button 
-            onClick={() => navigateTo('/admin/add-project')}
-            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-          >
-            + Add Project
-          </button>
-        </div>
-        
-        <div className="bg-white rounded shadow overflow-hidden">
-          <table className="min-w-full">
-            <thead className="bg-gray-100">
-              <tr>
-                <th className="py-3 px-4 text-left">Title</th>
-                <th className="py-3 px-4 text-left">Description</th>
-                <th className="py-3 px-4 text-left">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {projects.map(project => (
-                <tr key={project._id} className="border-t">
-                  <td className="py-3 px-4">{project.title}</td>
-                  <td className="py-3 px-4">{project.description?.substring(0, 50)}...</td>
-                  <td className="py-3 px-4">
-                    <button
-                      onClick={() => handleEdit(project._id)}
-                      className="bg-blue-600 text-white px-3 py-1 rounded mr-2 hover:bg-blue-700"
-                    >
-                      Edit
-                    </button>
-                    <button
-                      onClick={() => handleDelete(project._id)}
-                      className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700"
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    );
-  };
+  }
 
   return (
-    <div className="flex h-screen bg-gray-100">
-      {/* Sidebar */}
-      <div className="w-64 bg-gray-800 text-white">
-        <div className="p-4 font-bold text-lg">Admin Dashboard</div>
-        <div className="mt-6">
-          <button 
-            onClick={() => setActiveSection('dashboard')}
-            className={`block w-full text-left px-4 py-2 hover:bg-gray-700 ${activeSection === 'dashboard' ? 'bg-gray-700' : ''}`}
-          >
-            Dashboard
-          </button>
-          <button 
-            onClick={() => setActiveSection('projects')}
-            className={`block w-full text-left px-4 py-2 hover:bg-gray-700 ${activeSection === 'projects' ? 'bg-gray-700' : ''}`}
-          >
-            Projects
-          </button>
-          <button 
-            className="block w-full text-left px-4 py-2 hover:bg-gray-700"
-          >
-            Blog
-          </button>
-          <button 
-            className="block w-full text-left px-4 py-2 hover:bg-gray-700"
-          >
-            Testimonials
-          </button>
+    <div className="flex bg-gray-100 min-h-screen">
+      <AdminSidebar />
+      <div className="flex-1 p-8">
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold text-gray-800">Dashboard</h1>
+          <p className="text-gray-600 mt-1">Welcome to your admin panel</p>
         </div>
-        <div className="absolute bottom-0 left-0 w-64 border-t border-gray-700 p-4">
-          <button
-            onClick={handleLogout}
-            className="bg-red-600 text-white px-4 py-2 rounded w-full"
-          >
-            Logout
-          </button>
+
+        {error && <p className="text-red-500">{error}</p>}
+
+        {/* Stats Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          {['projects', 'blogs', 'testimonials', 'gallery'].map((type, index) => (
+            <div key={index} className="bg-white rounded-lg shadow-md p-6 border-l-4 border-gray-300 hover:shadow-lg transition-shadow">
+              <p className="text-gray-500 text-sm capitalize">{type}</p>
+              <p className="text-2xl font-bold">{stats[type]}</p>
+            </div>
+          ))}
         </div>
-      </div>
-      
-      {/* Main Content */}
-      <div className="flex-1 p-8 overflow-y-auto">
-        {activeSection === 'dashboard' ? renderDashboardContent() : renderProjectsContent()}
+
+        {/* Recent Projects Section */}
+        <div className="bg-white rounded-lg shadow-md p-6">
+          <h2 className="text-xl font-semibold text-gray-800 border-b pb-2">Recent Projects</h2>
+          {recentProjects.length > 0 ? (
+            <ul className="divide-y">
+              {recentProjects.map((project) => (
+                <li key={project._id} className="py-4 flex justify-between items-center">
+                  <div>
+                    <h3 className="font-medium text-gray-800">{project.title}</h3>
+                    <p className="text-sm text-gray-500">Client: {project.client}</p>
+                    <p className="text-xs text-gray-400">{new Date(project.date).toLocaleDateString()}</p>
+                  </div>
+                  <Link to={`/admin/edit-project/${project._id}`}>
+                    <button className="p-2 bg-yellow-100 text-yellow-600 rounded hover:bg-yellow-200">Edit</button>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <div className="text-center py-6">
+              <p className="text-gray-500">No projects found.</p>
+              <Link to="/admin/add-project">
+                <button className="mt-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Add Project</button>
+              </Link>
+            </div>
+          )}
+        </div>
+
+        {/* Recent Testimonials Section */}
+        <div className="bg-white rounded-lg shadow-md p-6 mt-8">
+          <h2 className="text-xl font-semibold text-gray-800 border-b pb-2">Recent Testimonials</h2>
+          {recentTestimonials.length > 0 ? (
+            <ul className="space-y-4">
+              {recentTestimonials.map((testimonial) => (
+                <li key={testimonial._id} className="bg-gray-50 p-4 rounded-lg border border-gray-100">
+                  <div className="flex items-center">
+                    <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-500 mr-3">
+                      {testimonial.name ? testimonial.name.charAt(0).toUpperCase() : 'A'}
+                    </div>
+                    <div>
+                      <h3 className="font-medium text-gray-800">{testimonial.name || 'Anonymous'}</h3>
+                      {testimonial.company && <p className="text-xs text-gray-500">{testimonial.company}</p>}
+                    </div>
+                  </div>
+                  <p className="text-gray-600 italic">{testimonial.message}</p>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <div className="text-center py-6">
+              <p className="text-gray-500">No testimonials found.</p>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

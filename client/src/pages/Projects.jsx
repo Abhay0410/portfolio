@@ -1,89 +1,88 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Projects = () => {
   const [projects, setProjects] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const navigate = useNavigate(); // Use navigate for dashboard redirection
 
   useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/projects`);
-        
-        if (!response.ok) {
-          throw new Error("Failed to load projects");
-        }
-        
-        const data = await response.json();
-        setProjects(data);
-        setLoading(false);
-      } catch (err) {
-        setError(err.message || "Failed to load projects");
-        setLoading(false);
-      }
-    };
-
     fetchProjects();
-  }, []);
+  }, [projects]); // Ensure projects update dynamically
 
-  if (loading) {
-    return (
-      <section className="bg-[#F0F4F8] min-h-screen px-6 py-16 flex items-center justify-center">
-        <div className="text-xl text-[#161179]">Loading projects...</div>
-      </section>
-    );
-  }
+  const fetchProjects = async () => {
+    const token = localStorage.getItem('token');
+    const res = await fetch('http://localhost:5000/api/projects', {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const data = await res.json();
+    setProjects(data);
+  };
 
-  if (error) {
-    return (
-      <section className="bg-[#F0F4F8] min-h-screen px-6 py-16 flex items-center justify-center">
-        <div className="text-xl text-red-600">{error}</div>
-      </section>
-    );
-  }
+  const handleDelete = async (id) => {
+    const confirmDelete = window.confirm('Are you sure you want to delete this project?');
+    if (!confirmDelete) return;
+    
+    const token = localStorage.getItem('token');
+    await fetch(`http://localhost:5000/api/projects/${id}`, {
+      method: 'DELETE',
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    setProjects((prev) => prev.filter((p) => p._id !== id));
+  };
 
   return (
-    <section className="bg-[#F0F4F8] min-h-screen px-6 py-16">
-      <h2 className="text-4xl font-bold text-center text-[#161179] mb-2">Projects</h2>
-      <p className="text-center text-[#161179] text-3xl mb-10">
-        Some of the recent work I've built and deployed
-      </p>
-
-      <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
-        {projects.map((proj) => (
-          <div
-            key={proj._id}
-            className="bg-[#F1EFEC] rounded-xl shadow-lg hover:shadow-2xl transition duration-300"
+    <div className="p-6">
+      <div className="flex justify-between items-center mb-4">
+        <h1 className="text-2xl font-bold">Projects</h1>
+        <div className="flex gap-4">
+          <Link to="/admin/add-project">
+            <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+              Add New Project
+            </button>
+          </Link>
+          <button
+            onClick={() => navigate('/admin/dashboard')}
+            className="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700"
           >
-            <img
-              src={proj.image}
-              alt={proj.title}
-              className="rounded-t-xl w-full h-48 object-cover"
-            />
-            <div className="p-5">
-              <h3 className="text-2xl font-semibold text-[#064283] mb-2 text-center">
-                {proj.title}
-              </h3>
-              <p className="text-sm text-gray-900 mb-3 font-semibold">
-                {proj.description}
-              </p>
-              {proj.github && (
-                <div className="text-center mt-4">
-                  <a 
-                    href={proj.github} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="inline-block bg-[#064283] text-white px-4 py-2 rounded hover:bg-blue-700"
-                  >
-                    View on GitHub
-                  </a>
-                </div>
-              )}
-            </div>
-          </div>
-        ))}
+            Back to Dashboard
+          </button>
+        </div>
       </div>
-    </section>
+
+      <table className="w-full table-auto">
+        <thead>
+          <tr className="bg-gray-200 text-left">
+            <th className="p-2">Title</th>
+            <th className="p-2">Client</th>
+            <th className="p-2">Date</th>
+            <th className="p-2">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {projects.map((p) => (
+            <tr key={p._id} className="text-center border-b">
+              <td className="p-2">{p.title}</td>
+              <td className="p-2">{p.client}</td>
+              <td className="p-2">{new Date(p.date).toLocaleDateString()}</td>
+              <td className="p-2 space-x-2">
+                <Link to={`/admin/edit-project/${p._id}`}>
+                  <button className="bg-yellow-500 px-3 py-1 text-white rounded hover:bg-yellow-600">
+                    Edit
+                  </button>
+                </Link>
+                <button
+                  onClick={() => handleDelete(p._id)}
+                  className="bg-red-600 px-3 py-1 text-white rounded hover:bg-red-700"
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 };
 
