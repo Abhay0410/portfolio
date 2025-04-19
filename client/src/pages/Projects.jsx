@@ -11,7 +11,7 @@ const Projects = () => {
 
   const fetchProjects = async () => {
     const token = localStorage.getItem('token');
-    const res = await fetch('http://localhost:5000/api/projects', {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/projects`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     const data = await res.json();
@@ -23,7 +23,7 @@ const Projects = () => {
     if (!confirmDelete) return;
     
     const token = localStorage.getItem('token');
-    await fetch(`http://localhost:5000/api/projects/${id}`, {
+    await fetch(`${import.meta.env.VITE_API_URL}/api/projects/${id}`, {
       method: 'DELETE',
       headers: { Authorization: `Bearer ${token}` },
     });

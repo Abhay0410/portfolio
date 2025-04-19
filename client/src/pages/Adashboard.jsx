@@ -16,13 +16,13 @@ const Adashboard = () => {
         const token = localStorage.getItem('token');
 
         // Fetch individual counts
-        const projectsRes = await fetch('http://localhost:5000/api/projects');
+        const projectsRes = await fetch(`${import.meta.env.VITE_API_URL}/api/projects?limit=8`, );
         if (!projectsRes.ok) throw new Error('Failed to fetch projects');
 
         const projectsData = await projectsRes.json();
         setStats({ projects: projectsData.length });
-        setRecentProjects(projectsData.slice(0, 3));
-        localStorage.setItem('recentProjects', JSON.stringify(projectsData.slice(0, 3))); // Cache data
+        setRecentProjects(projectsData.slice(0, 8));
+        localStorage.setItem('recentProjects', JSON.stringify(projectsData.slice(0, 8))); // Cache data
       } catch (error) {
         setError('Failed to fetch data. Showing cached data.');
       } finally {

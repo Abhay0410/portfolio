@@ -7,7 +7,7 @@ require('dotenv').config();
 // GET all projects (public)
 router.get('/', async (req, res) => {
   try {
-    const limit = parseInt(req.query.limit) || 0;
+    const limit = parseInt(req.query.limit) || 8;
     const projects = await Project.find().sort({ date: -1 }).limit(limit);
     res.status(200).json(projects);
   } catch (err) {
