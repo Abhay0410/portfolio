@@ -19,6 +19,15 @@ import Adashboard from './pages/Adashboard';
 import Projects from './pages/Projects'; // Admin projects management
 import AddProject from './pages/AddProject';
 import EditProject from './pages/EditProject';
+
+import AdminTestimonials from "./pages/AdminTestimonials";
+import AddTestimonial from "./pages/AddTestimonial";
+import EditTestimonial from "./pages/EditTestimonial";
+
+
+
+
+
 import ProtectedRoute from './componets/ProtectedRoute'; // Fixed path
 
 function App() {
@@ -47,7 +56,10 @@ function App() {
               <Route path="dashboard" element={<Adashboard />} />
               <Route path="projects" element={<Projects />} />
               <Route path="add-project" element={<AddProject />} />
+              <Route path="testimonials" element={<AdminTestimonials />} />
+              <Route path="/admin/add-testimonial" element={<AddTestimonial />} />
               <Route path="edit-project/:id" element={<EditProject />} />
+              <Route path="/admin/edit-testimonial/:id" element={<EditTestimonial />} />
             </Route>
             
             {/* For backward compatibility */}

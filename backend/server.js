@@ -45,5 +45,6 @@ mongoose.connect(process.env.MONGO_URI)
 app.use("/api/admin", require("./routes/serveradmin"));
 app.use("/api/send-email", require("./routes/serverContact"));
 app.use("/api/projects", require("./routes/serverprojects"));
+app.use("/api/testimonials", require("./routes/testimonials"));
 
 module.exports = { upload }; // Export Multer instance
