@@ -13,6 +13,8 @@ import SEO from './pages/SEO';
 import AppD from './pages/AppD';
 import AnimeV from './pages/AnimeV';
 
+import Gallery from './pages/Gallery';
+
 // Admin components
 import AdminLogin from "./pages/AdminLogin";
 import Adashboard from './pages/Adashboard';
@@ -24,6 +26,9 @@ import AdminTestimonials from "./pages/AdminTestimonials";
 import AddTestimonial from "./pages/AddTestimonial";
 import EditTestimonial from "./pages/EditTestimonial";
 
+import AdminGallery from './pages/AdminGallery'; // Admin gallery management
+import AddGallery from './pages/AddGallery'; // Form for adding gallery items
+import EditGallery from './pages/EditGallery'; // Form for editing gallery items
 
 
 
@@ -49,6 +54,7 @@ function App() {
             <Route path="/seo" element={<SEO />} />
             <Route path="/web-development" element={<WebDevelopment />} />
             <Route path="/animev" element={<AnimeV />} />
+            <Route path="/gallery" element={<Gallery />} />
             <Route path="/admin" element={<AdminLogin />} />
             
             {/* Admin Protected Routes */}
@@ -60,6 +66,9 @@ function App() {
               <Route path="/admin/add-testimonial" element={<AddTestimonial />} />
               <Route path="edit-project/:id" element={<EditProject />} />
               <Route path="/admin/edit-testimonial/:id" element={<EditTestimonial />} />
+              <Route path="gallery" element={<AdminGallery />} /> 
+              <Route path="add-gallery" element={<AddGallery />} />
+              <Route path="edit-gallery/:id" element={<EditGallery />} /> 
             </Route>
             
             {/* For backward compatibility */}

@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import AdminSidebar from "../componets/AdminSidebar";
+
 import axios from "axios";
 
 const Adashboard = () => {
-  const [stats, setStats] = useState({ projects: 0, blogs: 0, testimonials: 0, gallery: 0 });
+  const [stats, setStats] = useState({ projects: 0, testimonials: 0, gallery: 0 });
   const [recentProjects, setRecentProjects] = useState([]);
   const [recentTestimonials, setRecentTestimonials] = useState([]);
+  const [recentGalleryItems, setRecentGalleryItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -16,21 +18,23 @@ const Adashboard = () => {
         setLoading(true);
         const token = localStorage.getItem("token");
 
-        const [projectsRes, testimonialsRes] = await Promise.all([
-          axios.get(`${import.meta.env.VITE_API_URL}/api/projects?limit=6`, { headers: { Authorization: `Bearer ${token}` } }),
-          axios.get(`${import.meta.env.VITE_API_URL}/api/testimonials?limit=6`, { headers: { Authorization: `Bearer ${token}` } }),
+        const [projectsRes, testimonialsRes, galleryRes] = await Promise.all([
+          axios.get(`${import.meta.env.VITE_API_URL}/api/projects`, { headers: { Authorization: `Bearer ${token}` } }),
+          axios.get(`${import.meta.env.VITE_API_URL}/api/testimonials`, { headers: { Authorization: `Bearer ${token}` } }),
+          axios.get(`${import.meta.env.VITE_API_URL}/api/gallery`, { headers: { Authorization: `Bearer ${token}` } }),
         ]);
 
-        setStats((prevStats) => ({
-          ...prevStats,
+        setStats({
           projects: projectsRes.data.length,
           testimonials: testimonialsRes.data.length,
-        }));
+          gallery: galleryRes.data.length,
+        });
 
-        setRecentProjects(projectsRes.data);
-        setRecentTestimonials(testimonialsRes.data);
+        setRecentProjects(projectsRes.data.slice(0, 5));
+        setRecentTestimonials(testimonialsRes.data.slice(0, 5));
+        setRecentGalleryItems(galleryRes.data.slice(0, 5)); // Fetching recent gallery items
       } catch (error) {
-        setError("Failed to fetch data. Showing cached data.");
+        setError("Failed to fetch data. Please try again later.");
       } finally {
         setLoading(false);
       }
@@ -58,10 +62,9 @@ const Adashboard = () => {
         {error && <p className="text-red-500">{error}</p>}
 
         {/* 🔹 Statistics Section */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
           {[
             { label: "Projects", count: stats.projects, color: "blue" },
-            { label: "Blogs", count: stats.blogs, color: "green" },
             { label: "Testimonials", count: stats.testimonials, color: "yellow" },
             { label: "Gallery Items", count: stats.gallery, color: "red" },
           ].map((item, index) => (
@@ -102,7 +105,7 @@ const Adashboard = () => {
         </div>
 
         {/* 🔹 Recent Testimonials Section */}
-        <div className="bg-white rounded-lg shadow-md p-6">
+        <div className="bg-white rounded-lg shadow-md p-6 mb-8">
           <h2 className="text-xl font-semibold text-gray-800 border-b pb-2">Recent Testimonials</h2>
           {recentTestimonials.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -124,6 +127,38 @@ const Adashboard = () => {
               <p className="text-gray-500">No testimonials found.</p>
               <Link to="/admin/add-testimonial">
                 <button className="mt-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Add Testimonial</button>
+              </Link>
+            </div>
+          )}
+        </div>
+
+        {/* 🔹 Recent Gallery Section */}
+        <div className="bg-white rounded-lg shadow-md p-6">
+          <h2 className="text-xl font-semibold text-gray-800 border-b pb-2">Recent Gallery Items</h2>
+          {recentGalleryItems.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {recentGalleryItems.map((item) => (
+                <div key={item._id} className="bg-white p-4 rounded shadow hover:shadow-lg transition duration-200">
+                  <img
+                    src={`${import.meta.env.VITE_API_URL}/uploads/${item.image}`}
+                    alt={item.title}
+                    className="w-full h-40 object-cover rounded mb-4"
+                  />
+                  <h3 className="text-lg font-semibold text-gray-700">{item.title}</h3>
+                  <p className="text-sm text-gray-500">{item.description}</p>
+                  <Link to={`/admin/edit-gallery/${item._id}`}>
+                    <button className="mt-2 px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600">
+                      Edit Item
+                    </button>
+                  </Link>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-6">
+              <p className="text-gray-500">No gallery items found.</p>
+              <Link to="/admin/add-gallery">
+                <button className="mt-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Add Item</button>
               </Link>
             </div>
           )}

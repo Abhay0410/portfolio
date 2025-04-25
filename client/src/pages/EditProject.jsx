@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import AdminSidebar from "../componets/AdminSidebar"; // Added AdminSidebar import
 
 const EditProject = () => {
   const { id } = useParams();
@@ -72,24 +73,63 @@ const EditProject = () => {
   };
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Edit Project</h1>
-      {error && <p className="text-red-600">{error}</p>}
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input type="text" name="title" placeholder="Project Title" value={form.title} onChange={handleChange} className="w-full p-2 border rounded" required />
-        <textarea name="about" placeholder="Project Description" value={form.about} onChange={handleChange} className="w-full p-2 border rounded" required />
-        <input type="text" name="client" placeholder="Client Name" value={form.client} onChange={handleChange} className="w-full p-2 border rounded" required />
-        <input type="file" name="image" onChange={handleChange} className="w-full p-2 border rounded" required />
+    <div className="flex bg-gray-100 min-h-screen">
+      {/* AdminSidebar Component */}
+      <AdminSidebar />
 
-        <div className="flex gap-4">
-          <button type="submit" className="px-4 py-2 bg-green-600 text-white rounded" disabled={loading}>
-            {loading ? 'Updating...' : 'Update Project'}
-          </button>
-          <button type="button" onClick={() => navigate('/admin/dashboard')} className="px-4 py-2 bg-gray-500 text-white rounded">
-            Back to Dashboard
-          </button>
-        </div>
-      </form>
+      {/* Main Content */}
+      <div className="flex-1 p-6">
+        <h1 className="text-2xl font-bold mb-4">Edit Project</h1>
+        {error && <p className="text-red-600">{error}</p>}
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <input
+            type="text"
+            name="title"
+            placeholder="Project Title"
+            value={form.title}
+            onChange={handleChange}
+            className="w-full p-2 border rounded"
+            required
+          />
+          <textarea
+            name="about"
+            placeholder="Project Description"
+            value={form.about}
+            onChange={handleChange}
+            className="w-full p-2 border rounded"
+            required
+          />
+          <input
+            type="text"
+            name="client"
+            placeholder="Client Name"
+            value={form.client}
+            onChange={handleChange}
+            className="w-full p-2 border rounded"
+            required
+          />
+          <input
+            type="file"
+            name="image"
+            onChange={handleChange}
+            className="w-full p-2 border rounded"
+            required
+          />
+
+          <div className="flex gap-4">
+            <button type="submit" className="px-4 py-2 bg-green-600 text-white rounded" disabled={loading}>
+              {loading ? 'Updating...' : 'Update Project'}
+            </button>
+            <button
+              type="button"
+              onClick={() => navigate('/admin/dashboard')}
+              className="px-4 py-2 bg-gray-500 text-white rounded"
+            >
+              Back to Dashboard
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

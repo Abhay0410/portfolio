@@ -1,5 +1,5 @@
 import React from 'react';
-import SEOimg from '../assets/seo-service.png'; 
+// import SEOimg from '../assets/seo-service.png'; 
 import {
   Search,
   TrendingUp,
@@ -55,7 +55,7 @@ const SEO = () => {
         </div>
 
         <div className="md:w-1/2 flex justify-center">
-          <img src={SEOimg} alt="SEO Illustration" className="max-w-md w-full" />
+          <img src="/seo-service.png" alt="SEO Illustration" className="max-w-md w-full" />
         </div>
       </div>
     </section>

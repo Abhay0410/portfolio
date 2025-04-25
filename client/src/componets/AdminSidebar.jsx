@@ -51,12 +51,31 @@ const AdminSidebar = () => {
 </li>
 <li>
   <Link 
+    to="/admin/gallery" 
+    className={`flex items-center p-3 rounded hover:bg-blue-700 transition-colors ${isActive("/admin/gallery")}`}
+  >
+    <FiFolder className="mr-2" /> Manage Gallery
+  </Link>
+</li>
+
+<li>
+  <Link 
+    to="/admin/add-gallery" 
+    className={`flex items-center p-3 rounded hover:bg-blue-700 transition-colors ${isActive("/admin/add-gallery")}`}
+  >
+    <FiPlusCircle className="mr-2" /> Add Gallery Item
+  </Link>
+</li>
+
+<li>
+  <Link 
     to="/admin/testimonials" 
     className={`flex items-center p-3 rounded hover:bg-blue-700 transition-colors ${isActive("/admin/testimonials")}`}
   >
     <FiMessageSquare className="mr-2" /> Manage Testimonials
   </Link>
 </li>
+
 <li>
   <Link 
     to="/admin/add-testimonial" 

@@ -1,5 +1,5 @@
 import React from 'react';
-import webDevImage from '../assets/webdevelopment.png';
+// import webDevImage from '../assets/webdevelopment.png';
 import { Globe, ShoppingCart, Monitor, Layers, Zap, Settings, Code, Database, Shield, Wrench, Activity } from 'lucide-react';
 
 const services = [
@@ -43,7 +43,7 @@ const WebDevelopment = () => {
 
         {/* Right Illustration Placeholder */}
         <div className="md:w-1/2 flex justify-center">
-          <img src={webDevImage} alt="Illustration" className="max-w-md w-full" />
+          <img src="/webdevelopment.png" alt="Illustration" className="max-w-md w-full" />
         </div>
       </div>
     </section>

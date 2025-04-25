@@ -1,6 +1,6 @@
 import React from 'react';
 import { Film, Mic, Video, Edit3, SlidersHorizontal, MessageSquare } from 'lucide-react';
-import AnimatedVideoImage from '../assets/animated-video.png';
+// import AnimatedVideoImage from '../assets/animated-video.png';
 const features = [
   { icon: <Film />, title: '2D/3D Animation' },
   { icon: <Mic />, title: 'Voice Over' },
@@ -35,7 +35,7 @@ const AnimatedVideos = () => {
         </div>
 
         <div className="md:w-1/2 flex justify-center">
-          <img src={AnimatedVideoImage} alt="Animated Video" className="max-w-md w-full" />
+          <img src="/animated-video.png" alt="Animated Video" className="max-w-md w-full" />
         </div>
       </div>
     </section>

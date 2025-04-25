@@ -1,6 +1,6 @@
 import React from 'react';
 import { Code, Paintbrush, Smartphone, Search, Layout, Film } from 'lucide-react'; 
-import SerBg from '../assets/service.jpg';
+// import SerBg from '../assets/service.jpg';
 const services = [
   {
     title: 'Web Development',
@@ -38,7 +38,7 @@ const Services = () => {
   return (
     <section
   className="py-20 bg-cover bg-center bg-no-repeat relative"
-  style={{ backgroundImage: `url(${SerBg})` }}
+  style={{ backgroundImage: "url(/service.jpg)" }}
   id="services"
 >
   <div className="absolute inset-0 bg-white/5 backdrop-blur-md"></div> {/* Semi-transparent overlay */}

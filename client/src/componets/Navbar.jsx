@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import React from 'react';
-import logo from '../assets/logo.jpg'; // Make sure this path is correct
 
 const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -12,25 +11,27 @@ const Navbar = () => {
   return (
     <nav className="bg-[#051224] shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+        {/* Logo */}
         <Link to="/" className="flex items-center">
-        <div className="bg-white p-2 rounded-full shadow-md">
-  <img src={logo} alt="Logo" className="h-10 w-auto" />
-</div>
-
+          <div className="bg-white p-2 rounded-full shadow-md">
+            <img src="/logo.jpg" alt="Logo" className="h-10 w-auto" />
+          </div>
         </Link>
 
         {/* Desktop Menu */}
         <div className="hidden md:flex text-white space-x-6 items-center">
           <NavLink to="/" label="Home" />
           <NavLink to="/about" label="About" />
-
+          
           {/* Services Dropdown */}
           <div
             className="relative"
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >
-           <Link to="/services" className="text-gray-200 font-medium hover:text-white border-b-2 border-transparent hover:border-white transition-all">Services</Link>
+            <Link to="/services" className="text-gray-200 font-medium hover:text-white border-b-2 border-transparent hover:border-white transition-all">
+              Services
+            </Link>
 
             <div className={`absolute left-0 mt-2 w-48 bg-white shadow-lg rounded-lg transition-all duration-200 ${isDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
               <DropdownLink to="/Web-development" label="Web Development" />
@@ -42,6 +43,7 @@ const Navbar = () => {
           </div>
 
           <NavLink to="/displayprojects" label="Projects" />
+          <NavLink to="/gallery" label="Gallery" /> {/* Added Gallery Option */}
           <NavLink to="/contact" label="Contact" />
         </div>
 
@@ -68,7 +70,8 @@ const Navbar = () => {
           <NavLink to="/" label="Home" />
           <NavLink to="/about" label="About" />
           <NavLink to="/services" label="Services" />
-          <NavLink to="/projects" label="Projects" />
+          <NavLink to="/displayprojects" label="Projects" />
+          <NavLink to="/gallery" label="Gallery" /> {/* Added Gallery Option */}
           <NavLink to="/contact" label="Contact" />
         </div>
       )}

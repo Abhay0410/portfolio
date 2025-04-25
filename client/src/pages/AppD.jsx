@@ -1,6 +1,6 @@
 import React from 'react';
 import { Smartphone, Palette, Touchpad, Layout, Code, CheckCircle } from 'lucide-react';
-import mobileImage from '../assets/mobile.png'; 
+// import mobileImage from '../assets/mobile.png'; 
 const features = [
   { icon: <Smartphone />, title: 'Mobile App UI' },
   { icon: <Palette />, title: 'Custom Design' },
@@ -35,7 +35,7 @@ const AppDesign = () => {
         </div>
 
         <div className="md:w-1/2 flex justify-center">
-          <img src={mobileImage} alt="App Design" className="max-w-md w-full" />
+          <img src="/mobile.png" alt="App Design" className="max-w-md w-full" />
         </div>
       </div>
     </section>

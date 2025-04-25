@@ -1,6 +1,6 @@
 import React from 'react';
 import { Paintbrush, PenTool, Eye, Ruler, Palette, TabletSmartphone, Layers, Focus, Edit3, Smile } from 'lucide-react';
-import UiuxImage from '../assets/uiux.jpg';
+// import UiuxImage from '../assets/uiux.jpg';
 
 const services = [
   { icon: <Paintbrush />, title: 'UI Design' },
@@ -41,7 +41,7 @@ const UIUXDesign = () => {
         </div>
 
         <div className="md:w-1/2 flex justify-center">
-          <img src={UiuxImage} alt="UI/UX Illustration" className="max-w-md w-full" />
+          <img src="/uiux.jpg" alt="UI/UX Illustration" className="max-w-md w-full" />
         </div>
       </div>
     </section>

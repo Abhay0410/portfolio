@@ -5,7 +5,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/effect-coverflow";
 import axios from "axios";
-import Heroabout from "../assets/project-employee-management.jpg";
+// import Heroabout from "../assets/project-employee-management.jpg";
 
 const About = () => {
   const [testimonials, setTestimonials] = useState([]);
@@ -22,16 +22,13 @@ const About = () => {
     };
 
     fetchTestimonials();
-
-    const preloadImage = new Image();
-    preloadImage.src = Heroabout;
   }, []);
 
   return (
     <div className="font-sans">
       {/* Hero Section */}
       <div className="relative min-h-screen flex items-center justify-center">
-        <div className="absolute inset-0 w-full h-full bg-cover bg-center bg-fixed" style={{ backgroundImage: `url('${Heroabout}')` }} />
+        <div className="absolute inset-0 w-full h-full bg-cover bg-center bg-fixed" style={{ backgroundImage: "url('/project-employee-management.jpg')" }} />
         <div className="absolute inset-0 bg-gradient-to-r from-blue-900/70 to-purple-900/70" />
 
         <div className="relative z-10 max-w-5xl mx-auto px-6 py-20 text-center">
@@ -82,7 +79,7 @@ const About = () => {
       </div>
 
       {/* Testimonials Section */}
-      {/* Testimonials Section */}
+    
 <div className="bg-gradient-to-br from-gray-50 to-gray-100 py-24 px-4">
   <div className="max-w-6xl mx-auto text-center mb-16">
     <span className="text-blue-600 font-semibold tracking-wider uppercase text-sm">Testimonials</span>
@@ -115,7 +112,7 @@ const About = () => {
       slidesPerView={1}
       loop={true}
       onSwiper={(swiper) => (swiperRef.current = swiper)}
-      autoplay={{ delay: 5000, disableOnInteraction: false }}
+      autoplay={{ delay: 3000, disableOnInteraction: false }}
       breakpoints={{
         640: { slidesPerView: 1 },
         768: { slidesPerView: 2, centeredSlides: false },

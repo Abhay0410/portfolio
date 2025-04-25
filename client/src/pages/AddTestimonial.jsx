@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import AdminSidebar from "../componets/AdminSidebar"; // Added AdminSidebar import
 
 const AddTestimonial = () => {
   const [formData, setFormData] = useState({ name: "", title: "", message: "" });
@@ -39,46 +40,52 @@ const AddTestimonial = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 p-6">
-      <div className="w-full max-w-md bg-white rounded-lg shadow-md p-6">
-        <h1 className="text-xl font-semibold text-gray-700 mb-4 text-center">Add New Testimonial</h1>
+    <div className="flex bg-gray-100 min-h-screen">
+      {/* AdminSidebar Component */}
+      <AdminSidebar />
 
-        {error && <p className="text-red-500 text-center text-sm bg-red-100 p-2 rounded">{error}</p>}
+      {/* Main Content */}
+      <div className="flex-1 p-6 flex items-center justify-center">
+        <div className="w-full max-w-md bg-white rounded-lg shadow-md p-6">
+          <h1 className="text-xl font-semibold text-gray-700 mb-4 text-center">Add New Testimonial</h1>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <input
-            type="text"
-            name="name"
-            placeholder="Client Name"
-            value={formData.name}
-            onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded-md text-sm focus:ring-gray-500 focus:border-gray-500"
-            required
-          />
-          <input
-            type="text"
-            name="title"
-            placeholder="Client Title"
-            value={formData.title}
-            onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded-md text-sm focus:ring-gray-500 focus:border-gray-500"
-            required
-          />
-          <textarea
-            name="message"
-            placeholder="Testimonial Message"
-            value={formData.message}
-            onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded-md text-sm focus:ring-gray-500 focus:border-gray-500"
-            required
-          />
-          <button
-            type="submit"
-            className="w-full bg-gray-700 text-white p-2 rounded-md text-sm hover:bg-gray-800 transition duration-200"
-          >
-            {loading ? "Adding..." : "Add Testimonial"}
-          </button>
-        </form>
+          {error && <p className="text-red-500 text-center text-sm bg-red-100 p-2 rounded">{error}</p>}
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <input
+              type="text"
+              name="name"
+              placeholder="Client Name"
+              value={formData.name}
+              onChange={handleChange}
+              className="w-full p-2 border border-gray-300 rounded-md text-sm focus:ring-gray-500 focus:border-gray-500"
+              required
+            />
+            <input
+              type="text"
+              name="title"
+              placeholder="Client Title"
+              value={formData.title}
+              onChange={handleChange}
+              className="w-full p-2 border border-gray-300 rounded-md text-sm focus:ring-gray-500 focus:border-gray-500"
+              required
+            />
+            <textarea
+              name="message"
+              placeholder="Testimonial Message"
+              value={formData.message}
+              onChange={handleChange}
+              className="w-full p-2 border border-gray-300 rounded-md text-sm focus:ring-gray-500 focus:border-gray-500"
+              required
+            />
+            <button
+              type="submit"
+              className="w-full bg-gray-700 text-white p-2 rounded-md text-sm hover:bg-gray-800 transition duration-200"
+            >
+              {loading ? "Adding..." : "Add Testimonial"}
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );

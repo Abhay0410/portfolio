@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import AdminSidebar from "../componets/AdminSidebar"; // Added AdminSidebar import
 
 const EditTestimonial = () => {
   const { id } = useParams(); // Get testimonial ID from the URL
@@ -45,43 +46,49 @@ const EditTestimonial = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-6">
-      <div className="w-full max-w-lg bg-white rounded-lg shadow-lg p-6">
-        <h1 className="text-2xl font-bold mb-4">Edit Testimonial</h1>
+    <div className="flex bg-gray-100 min-h-screen">
+      {/* AdminSidebar Component */}
+      <AdminSidebar />
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <input
-            type="text"
-            name="name"
-            placeholder="Client Name"
-            value={formData.name}
-            onChange={handleChange}
-            className="w-full p-3 border rounded"
-            required
-          />
-          <input
-            type="text"
-            name="title"
-            placeholder="Client Title"
-            value={formData.title}
-            onChange={handleChange}
-            className="w-full p-3 border rounded"
-            required
-          />
-          <textarea
-            name="message"
-            placeholder="Testimonial Message"
-            value={formData.message}
-            onChange={handleChange}
-            className="w-full p-3 border rounded"
-            required
-          />
-          <button type="submit" className="w-full bg-blue-600 text-white p-3 rounded">
-            {loading ? "Updating..." : "Update Testimonial"}
-          </button>
-        </form>
+      {/* Main Content */}
+      <div className="flex-1 p-6 flex items-center justify-center">
+        <div className="w-full max-w-lg bg-white rounded-lg shadow-lg p-6">
+          <h1 className="text-2xl font-bold mb-4">Edit Testimonial</h1>
 
-        {message && <p className="mt-4 text-center text-gray-700">{message}</p>}
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <input
+              type="text"
+              name="name"
+              placeholder="Client Name"
+              value={formData.name}
+              onChange={handleChange}
+              className="w-full p-3 border rounded"
+              required
+            />
+            <input
+              type="text"
+              name="title"
+              placeholder="Client Title"
+              value={formData.title}
+              onChange={handleChange}
+              className="w-full p-3 border rounded"
+              required
+            />
+            <textarea
+              name="message"
+              placeholder="Testimonial Message"
+              value={formData.message}
+              onChange={handleChange}
+              className="w-full p-3 border rounded"
+              required
+            />
+            <button type="submit" className="w-full bg-blue-600 text-white p-3 rounded">
+              {loading ? "Updating..." : "Update Testimonial"}
+            </button>
+          </form>
+
+          {message && <p className="mt-4 text-center text-gray-700">{message}</p>}
+        </div>
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import AdminSidebar from "../componets/AdminSidebar"; // Added AdminSidebar import
 
 const AddProject = () => {
   const [form, setForm] = useState({ title: "", client: "", about: "", image: null });
@@ -52,38 +53,44 @@ const AddProject = () => {
   };
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Add New Project</h1>
-      {error && <p className="text-red-600">{error}</p>}
+    <div className="flex bg-gray-100 min-h-screen">
+      {/* AdminSidebar Component */}
+      <AdminSidebar />
 
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <label className="block text-gray-700">Project Title</label>
-        <input type="text" name="title" value={form.title} onChange={handleChange} className="w-full p-2 border rounded" required />
+      {/* Main Content */}
+      <div className="flex-1 p-6">
+        <h1 className="text-2xl font-bold mb-4">Add New Project</h1>
+        {error && <p className="text-red-600">{error}</p>}
 
-        <label className="block text-gray-700">Project Description</label>
-        <textarea name="about" value={form.about} onChange={handleChange} className="w-full p-2 border rounded" required />
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <label className="block text-gray-700">Project Title</label>
+          <input type="text" name="title" value={form.title} onChange={handleChange} className="w-full p-2 border rounded" required />
 
-        <label className="block text-gray-700">Client Name</label>
-        <input type="text" name="client" value={form.client} onChange={handleChange} className="w-full p-2 border rounded" required />
+          <label className="block text-gray-700">Project Description</label>
+          <textarea name="about" value={form.about} onChange={handleChange} className="w-full p-2 border rounded" required />
 
-        <label className="block text-gray-700">Upload Image</label>
-        <input type="file" name="image" onChange={handleChange} className="w-full p-2 border rounded" required />
+          <label className="block text-gray-700">Client Name</label>
+          <input type="text" name="client" value={form.client} onChange={handleChange} className="w-full p-2 border rounded" required />
 
-        {imagePreview && (
-          <div className="mt-4">
-            <img src={imagePreview} alt="Project Preview" className="w-32 h-32 object-cover rounded shadow-md" />
+          <label className="block text-gray-700">Upload Image</label>
+          <input type="file" name="image" onChange={handleChange} className="w-full p-2 border rounded" required />
+
+          {imagePreview && (
+            <div className="mt-4">
+              <img src={imagePreview} alt="Project Preview" className="w-32 h-32 object-cover rounded shadow-md" />
+            </div>
+          )}
+
+          <div className="flex gap-4">
+            <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded" disabled={loading}>
+              {loading ? "Submitting..." : "Submit"}
+            </button>
+            <button type="button" onClick={() => navigate("/admin/dashboard")} className="px-4 py-2 bg-gray-500 text-white rounded">
+              Back to Dashboard
+            </button>
           </div>
-        )}
-
-        <div className="flex gap-4">
-          <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded" disabled={loading}>
-            {loading ? "Submitting..." : "Submit"}
-          </button>
-          <button type="button" onClick={() => navigate("/admin/dashboard")} className="px-4 py-2 bg-gray-500 text-white rounded">
-            Back to Dashboard
-          </button>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   );
 };
