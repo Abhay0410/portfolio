@@ -4,6 +4,7 @@ import React from 'react';
 
 const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // New state for mobile menu
 
   const handleMouseEnter = () => setIsDropdownOpen(true);
   const handleMouseLeave = () => setIsDropdownOpen(false);
@@ -22,7 +23,7 @@ const Navbar = () => {
         <div className="hidden md:flex text-white space-x-6 items-center">
           <NavLink to="/" label="Home" />
           <NavLink to="/about" label="About" />
-          
+
           {/* Services Dropdown */}
           <div
             className="relative"
@@ -43,14 +44,14 @@ const Navbar = () => {
           </div>
 
           <NavLink to="/displayprojects" label="Projects" />
-          <NavLink to="/gallery" label="Gallery" /> {/* Added Gallery Option */}
+          <NavLink to="/gallery" label="Gallery" />
           <NavLink to="/contact" label="Contact" />
         </div>
 
         {/* Mobile Menu Button */}
         <button
           className="md:hidden text-white focus:outline-none"
-          onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+          onClick={() => setIsMobileMenuOpen(true)}
         >
           <svg
             className="w-6 h-6"
@@ -64,17 +65,20 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile Menu */}
-      {isDropdownOpen && (
-        <div className="md:hidden px-4 text-gray-200 pb-4 space-y-2">
+      {/* Mobile Slide Menu */}
+      <div className={`fixed top-0 right-0 w-64 h-full bg-[#051224] z-50 transform ${isMobileMenuOpen ? "translate-x-0" : "translate-x-full"} transition-transform duration-300 ease-in-out md:hidden`}>
+        <div className="flex flex-col items-start p-6 text-white space-y-6">
+          <button onClick={() => setIsMobileMenuOpen(false)} className="self-end mb-6">
+            ✕
+          </button>
           <NavLink to="/" label="Home" />
           <NavLink to="/about" label="About" />
           <NavLink to="/services" label="Services" />
           <NavLink to="/displayprojects" label="Projects" />
-          <NavLink to="/gallery" label="Gallery" /> {/* Added Gallery Option */}
+          <NavLink to="/gallery" label="Gallery" />
           <NavLink to="/contact" label="Contact" />
         </div>
-      )}
+      </div>
     </nav>
   );
 };
