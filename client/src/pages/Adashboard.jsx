@@ -30,9 +30,9 @@ const Adashboard = () => {
           gallery: galleryRes.data.length,
         });
 
-        setRecentProjects(projectsRes.data.slice(0, 5));
-        setRecentTestimonials(testimonialsRes.data.slice(0, 5));
-        setRecentGalleryItems(galleryRes.data.slice(0, 5)); // Fetching recent gallery items
+        setRecentProjects(projectsRes.data.slice(0, 8));
+        setRecentTestimonials(testimonialsRes.data.slice(0, 8));
+        setRecentGalleryItems(galleryRes.data.slice(0, 8)); // Fetching recent gallery items
       } catch (error) {
         setError("Failed to fetch data. Please try again later.");
       } finally {

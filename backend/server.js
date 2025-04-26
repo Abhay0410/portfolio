@@ -7,9 +7,14 @@ require("dotenv").config();
 
 const app = express();
 
-// CORS Configuration
 const corsOptions = {
-  origin: "http://localhost:5173", // Ensure this matches your frontend port
+  origin: (origin, callback) => {
+    if (!origin || origin === "http://localhost:5173") {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   credentials: true,
 };
 app.use(cors(corsOptions));
@@ -29,7 +34,7 @@ const upload = multer({ storage }); // Multer instance
 
 // Connect to MongoDB
 mongoose
-  .connect(process.env.MONGO_URI)
+  .connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log("MongoDB connected");
 
