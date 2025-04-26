@@ -119,7 +119,7 @@ const AdminLogin = () => {
         </div>
         
         <div className="mt-6 text-center">
-          <p className="text-xs text-gray-600">&copy; {new Date().getFullYear()} Company Name. All rights reserved.</p>
+          <p className="text-xs text-gray-600">&copy; {new Date().getFullYear()} Abhay_Sonam. All rights reserved.</p>
         </div>
       </div>
     </div>
