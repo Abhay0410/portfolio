@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <div>
       {/* Improved Hero Section */}
-      <div className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
+      <div className="relative min-h-[91vh] flex items-center justify-center overflow-hidden">
         {/* Background image */}
         <div
           className="absolute inset-0 w-full h-full bg-cover bg-center bg-fixed"
@@ -66,7 +66,7 @@ const Home = () => {
       </div>
 
      {/* Why Work With Me Section */}
-     <section className="py-16 bg-[#E4B1F0]">
+     <section className="py-16 bg-[#dbd0c0]">
         <h2 className="text-4xl font-bold text-center mb-12 text-[#123458]">Why Work With Me?</h2>
 
         <div className="grid gap-10 md:grid-cols-3 px-6 max-w-7xl mx-auto">
@@ -99,7 +99,7 @@ const Home = () => {
       </section>
       
       {/* Trusted By Companies Section */}
-      <section className="py-20 bg-[#FFE1FF]">
+      <section className="py-20 bg-[#eae6ea]">
         <div className="max-w-6xl mx-auto px-6 text-center">
           <h2 className="text-4xl font-bold text-[#123458] mb-4">Trusted by Leading Companies</h2>
           <p className="text-gray-600 max-w-2xl mx-auto text-lg mb-12">
