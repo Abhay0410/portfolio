@@ -60,7 +60,7 @@ const Footer = () => {
           <ul className="text-gray-400 text-sm space-y-2">
             <li><Link to="/" className="hover:underline">Home</Link></li>
             <li><Link to="/contact" className="hover:underline">Contact</Link></li>
-            <li><Link to="/blog" className="hover:underline">Blog</Link></li>
+            <li><Link to="/services" className="hover:underline">services</Link></li>
             {/* <li><Link to="/404" className="hover:underline">404</Link></li> */}
           </ul>
 

@@ -6,9 +6,9 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   server: {
     hmr: {
-      overlay: true, // Enables the error overlay for debugging
+      overlay: false,
     },
-    port: 5173, // Default port for Vite
+    port: 3000, // Default port for Vite
     open: true, // Automatically opens the app in the browser
   },
 });
