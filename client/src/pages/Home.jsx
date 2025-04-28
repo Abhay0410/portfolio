@@ -28,7 +28,7 @@ const Home = () => {
         {/* Hero Content */}
         <div className="relative z-10 max-w-5xl mx-auto px-6 py-20 text-center">
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-            Hi There! –{" "}
+            Hey There! –{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-purple-200">
               <Typewriter
                 words={["Passionate", "Creative", "Digital", "Innovator", "Designer"]}
