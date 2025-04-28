@@ -3,7 +3,7 @@ const router = express.Router();
 const Gallery = require("../models/galleryModel");
 const upload = require("../middleware/upload"); // Assuming middleware for image upload is implemented
 
-// 🔹 Get All Gallery Items
+//  Get All Gallery Items
 router.get("/", async (req, res) => {
   try {
     const galleryItems = await Gallery.find();
@@ -13,7 +13,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-// 🔹 Get Single Gallery Item
+//  Get Single Gallery Item
 router.get("/:id", async (req, res) => {
   try {
     const galleryItem = await Gallery.findById(req.params.id);
@@ -24,7 +24,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// 🔹 Add New Gallery Item
+//  Add New Gallery Item
 router.post("/", upload.single("image"), async (req, res) => {
   try {
     const { title, description } = req.body;
@@ -37,7 +37,7 @@ router.post("/", upload.single("image"), async (req, res) => {
   }
 });
 
-// 🔹 Update Gallery Item
+//  Update Gallery Item
 router.put("/:id", upload.single("image"), async (req, res) => {
   try {
     const { title, description } = req.body;
@@ -51,7 +51,7 @@ router.put("/:id", upload.single("image"), async (req, res) => {
   }
 });
 
-// 🔹 Delete Gallery Item
+//  Delete Gallery Item
 router.delete("/:id", async (req, res) => {
   try {
     const galleryItem = await Gallery.findByIdAndDelete(req.params.id);

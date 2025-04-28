@@ -45,7 +45,7 @@ const AddGallery = () => {
       <AdminSidebar />
 
       <div className="flex-1 p-8">
-        {/* Top Section with Back Button */}
+        {/* Back Button */}
         <div className="flex justify-end mb-6">
           <button
             onClick={() => navigate("/admin/dashboard")}
