@@ -5,10 +5,10 @@ require('dotenv').config();
 
 const SECRET_KEY = process.env.JWT_SECRET;
 
-const adminUser = {
-  username: "abhay",
-  password: "123",
-};
+// const adminUser = {
+//   username: "abhay",
+//   password: "123",
+// };
 router.get('/verify-token', (req, res) => {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
@@ -27,7 +27,7 @@ router.get('/verify-token', (req, res) => {
 
 router.post('/', (req, res) => {
   const { username, password } = req.body;
-  if (username === adminUser.username && password === adminUser.password) {
+  if (username === process.env.ADMIN_USERNAME  && password === process.env.ADMIN_PASSWORD) {
     const token = jwt.sign({ username }, SECRET_KEY, { expiresIn: '1h' });
     res.json({ token });
   } else {
