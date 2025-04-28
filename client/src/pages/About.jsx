@@ -45,7 +45,7 @@ const About = () => {
       </div>
 
       {/* About Section */}
-      <div className="py-24 bg-white">
+      <div className="py-24 bg-[#E4B1F0]">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-4xl md:text-5xl font-extrabold mb-4 leading-relaxed">
@@ -80,7 +80,7 @@ const About = () => {
 
       {/* Testimonials Section */}
     
-<div className="bg-gradient-to-br from-gray-50 to-gray-100 py-24 px-4">
+<div className="bg-[#FFE1FF] py-24 px-4">
   <div className="max-w-6xl mx-auto text-center mb-16">
     <span className="text-blue-600 font-semibold tracking-wider uppercase text-sm">Testimonials</span>
     <h2 className="text-4xl font-bold text-gray-800 mb-4 mt-2">What Our Clients Say</h2>

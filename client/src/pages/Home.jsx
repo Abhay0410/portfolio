@@ -52,7 +52,7 @@ const Home = () => {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link to="/Projects">
-              <button className="bg-[#123458] text-white px-8 py-4 rounded-full hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-blue-900/20">
+              <button className="bg-[#123458] text-white px-8 py-4 rounded-full hover:bg-[#141b23] transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-blue-900/20">
                 Explore Our Work
               </button>
             </Link>
@@ -66,7 +66,7 @@ const Home = () => {
       </div>
 
      {/* Why Work With Me Section */}
-     <section className="py-16 bg-[#dbd0c0]">
+     <section className="py-16 bg-[#E4B1F0]">
         <h2 className="text-4xl font-bold text-center mb-12 text-[#123458]">Why Work With Me?</h2>
 
         <div className="grid gap-10 md:grid-cols-3 px-6 max-w-7xl mx-auto">
@@ -99,7 +99,7 @@ const Home = () => {
       </section>
       
       {/* Trusted By Companies Section */}
-      <section className="py-20 bg-[#eae6ea]">
+      <section className="py-20 bg-[#FFE1FF]">
         <div className="max-w-6xl mx-auto px-6 text-center">
           <h2 className="text-4xl font-bold text-[#123458] mb-4">Trusted by Leading Companies</h2>
           <p className="text-gray-600 max-w-2xl mx-auto text-lg mb-12">
